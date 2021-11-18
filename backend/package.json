@@ -1,0 +1,29 @@
+{
+  "name": "charity-mobile-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielNicutari/Charity-Mobile-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielNicutari/Charity-Mobile-App/issues"
+  },
+  "homepage": "https://github.com/GabrielNicutari/Charity-Mobile-App#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "printWidth": 90
+  }
+}
