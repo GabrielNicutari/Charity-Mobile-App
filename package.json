@@ -20,5 +20,10 @@
   "homepage": "https://github.com/GabrielNicutari/Charity-Mobile-App#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "printWidth": 90
   }
 }
