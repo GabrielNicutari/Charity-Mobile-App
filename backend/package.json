@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/GabrielNicutari/Charity-Mobile-App#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^4.2.0",
+    "mongoose": "^6.0.14"
   },
   "prettier": {
     "singleQuote": true,
