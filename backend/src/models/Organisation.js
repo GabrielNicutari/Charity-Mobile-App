@@ -23,6 +23,7 @@ const organisationSchema = new Schema({
     type: Number,
     required: true
   },
+  currentAmount: Number,
   overview: {
     type: String,
     required: true
