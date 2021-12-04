@@ -1,9 +1,12 @@
+require('./models/Organisation');
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
+const organisationRoutes = require('./routes/organisationRoutes');
 
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(organisationRoutes);
 
 const mongoUri =
   'mongodb+srv://admin:w8A1min@charityapp.ku5h3.mongodb.net/charity?retryWrites=true&w=majority';
