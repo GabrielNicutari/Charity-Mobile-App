@@ -2,6 +2,7 @@ require('./models/Organisation');
 const express = require('express');
 const mongoose = require('mongoose');
 const organisationRoutes = require('./routes/organisationRoutes');
+// const appRouter = require('./router'); // for a better organisation of the routes (more complex apps)
 
 const app = express();
 app.use(express.json());
