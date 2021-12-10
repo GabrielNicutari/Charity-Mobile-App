@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-const SignInScreen = (props) => {
+const SignInScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <Text>The Sign In Screen!</Text>
+      <Button title="Main" onPress={() => navigation.navigate('mainFlow')} />
     </View>
   );
 };
@@ -15,4 +17,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignInScreen;
+export default withNavigation(SignInScreen);

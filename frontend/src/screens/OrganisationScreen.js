@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const OrganisationScreen = (props) => {
+const OrganisationScreen = () => {
   return (
     <View style={styles.screen}>
       <Text>The Organisation Screen!</Text>
