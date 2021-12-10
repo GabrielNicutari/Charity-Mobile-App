@@ -1,16 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import api from './src/api/server';
 import WelcomeScreen from './src/screens/WelcomeScreen';
-import { createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import OrganisationCategoriesScreen from './src/screens/OrganisationCategoriesScreen';
+import OrganisationListScreen from './src/screens/OrganisationListScreen';
+import OrganisationScreen from './src/screens/OrganisationScreen';
+import SignInScreen from './src/screens/SignInScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 
 const organisationFlow = createStackNavigator({
   OrganisationCategories: OrganisationCategoriesScreen,
   OrganisationList: OrganisationListScreen,
-  OrganisationDetails: OrganisationDetailsScreen
+  Organisation: OrganisationScreen
 });
 
 const switchNavigator = createSwitchNavigator({
@@ -25,35 +27,12 @@ const switchNavigator = createSwitchNavigator({
   })
 });
 
-export default function App() {
-  useEffect(() => {
-    testConnection();
-  }, []);
+const App = createAppContainer(switchNavigator);
 
-  const [data, setData] = useState('');
-
-  const testConnection = async () => {
-    const res = await api.get('/organisations');
-
-    // console.log(data.data.name);
-    setData(res.data[0].name);
-  };
-
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>Something {data}</Text>
-      {/*<WelcomeScreen />*/}
-      <StatusBar style="auto" />
-    </View>
+    <App>
+      <WelcomeScreen />
+    </App>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+};
