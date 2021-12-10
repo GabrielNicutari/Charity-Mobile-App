@@ -8,6 +8,8 @@ import OrganisationListScreen from './src/screens/OrganisationListScreen';
 import OrganisationScreen from './src/screens/OrganisationScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
+import PromotionScreen from './src/screens/PromotionScreen';
+import AccountScreen from './src/screens/AccountScreen';
 
 const organisationFlow = createStackNavigator({
   OrganisationCategories: OrganisationCategoriesScreen,
