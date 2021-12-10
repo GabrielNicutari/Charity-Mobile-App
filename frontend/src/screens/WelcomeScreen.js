@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const WelcomeScreen = (props) => {
   return (
     <View style={styles.screen}>
-      <Text>The Welcome Screen</Text>
+      <Text>The Welcome Screen!</Text>
     </View>
   );
 };

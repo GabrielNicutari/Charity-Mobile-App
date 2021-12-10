@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import api from './src/api/server';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 
 export default function App() {
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <Text>Something {data}</Text>
-      {/*<WelcomeScreen />*/}
+      <WelcomeScreen />
       <StatusBar style="auto" />
     </View>
   );
