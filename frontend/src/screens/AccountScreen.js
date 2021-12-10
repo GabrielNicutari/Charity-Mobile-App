@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const OrganisationCategoriesScreen = (props) => {
+const AccountScreen = (props) => {
   return (
     <View style={styles.screen}>
-      <Text>The Organisation Categories Screen!</Text>
+      <Text>The Account Screen!</Text>
     </View>
   );
 };
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OrganisationCategoriesScreen;
+export default AccountScreen;
