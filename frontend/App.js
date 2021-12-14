@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from './src/api/server';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -32,9 +33,5 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator);
 
 export default () => {
-  return (
-    <App>
-      <WelcomeScreen />
-    </App>
-  );
+  return <App />;
 };
