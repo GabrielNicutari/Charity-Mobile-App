@@ -11,6 +11,8 @@ import SignInScreen from './src/screens/SignInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import PromotionScreen from './src/screens/PromotionScreen';
 import AccountScreen from './src/screens/AccountScreen';
+import { Provider as AuthProvider } from './src/context/AuthContext';
+import { setNavigator } from './src/navigationRef';
 
 const organisationFlow = createStackNavigator({
   OrganisationCategories: OrganisationCategoriesScreen,
@@ -33,5 +35,13 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator);
 
 export default () => {
-  return <App />;
+  return (
+    <AuthProvider>
+      <App
+        ref={(navigator) => {
+          setNavigator(navigator);
+        }}
+      />
+    </AuthProvider>
+  );
 };
