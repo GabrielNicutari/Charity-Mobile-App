@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import API from '../api/server';
 
@@ -11,25 +11,38 @@ const SignInScreen = ({ navigation }) => {
     setLoading(true);
     try {
       const result = await API.get('/organisations');
-      setOrganisations([1, 2, 3, 4, 5, 6]);
-      // setOrganisations(result.data);
+      setOrganisations(result.data);
     } catch (error) {
       console.log('ERROR\n' + error);
     }
     setLoading(false);
   };
 
+  const renderItem = ({ item }) => {
+    return <Text>{item.name}</Text>;
+  };
+
   useEffect(() => {
-    fetchData().then(console.log(organisations));
+    fetchData().then(() => console.log('data fetched!'));
   }, []);
 
+  // console.log(organisations);
   return (
     <View style={styles.screen}>
       <Text>The Sign In Screen!</Text>
 
-      {organisations.map((item, index) => (
-        <Text key={index}> {item} </Text>
-      ))}
+      {loading ? (
+        <Text>Loading data...</Text>
+      ) : organisations.length === 0 ? (
+        <Text>No organisation!</Text>
+      ) : (
+        // <Text>{organisations}</Text>
+        <FlatList
+          data={organisations}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+        />
+      )}
 
       <Button title="Main" onPress={() => navigation.navigate('mainFlow')} />
     </View>
