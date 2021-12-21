@@ -43,7 +43,9 @@ const OrganisationListScreen = ({ navigation }) => {
   console.log(state);
 
   //Will be used as data field for the FlatList when category field will be implemented in database
-  // const categoryOrganisations = state.organisations.filter(org => org.category.localeCompare(category))
+  const categoryOrganisations = state.organisations.filter(
+    (org) => org.category === navigation.getParam('organisationCategory')
+  );
 
   return (
     <View style={styles.screen}>
@@ -54,7 +56,7 @@ const OrganisationListScreen = ({ navigation }) => {
         <Text>No organisation!</Text>
       ) : (
         <FlatList
-          data={state.organisations}
+          data={categoryOrganisations}
           renderItem={renderItem}
           keyExtractor={(item) => item._id}
         />
