@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import API from './src/api/server';
-import WelcomeScreen from './src/screens/WelcomeScreen';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -14,6 +12,7 @@ import AccountScreen from './src/screens/AccountScreen';
 import { Provider as OrganisationProvider } from './src/context/OrganisationContext';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { setNavigator } from './src/navigationRef';
+import Loading from './src/screens/Loading';
 
 const organisationFlow = createStackNavigator({
   OrganisationCategories: OrganisationCategoriesScreen,
@@ -22,6 +21,7 @@ const organisationFlow = createStackNavigator({
 });
 
 const switchNavigator = createSwitchNavigator({
+  Loading: Loading,
   loginFlow: createStackNavigator({
     SignIn: SignInScreen,
     SignUp: SignUpScreen
