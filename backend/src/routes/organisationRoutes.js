@@ -22,6 +22,7 @@ router.post('/organisations', async (req, res) => {
     keywords,
     monthlyGoal,
     overview,
+    category,
     history,
     achievements,
     gallery
@@ -35,6 +36,7 @@ router.post('/organisations', async (req, res) => {
       keywords: keywords ? keywords : ['test', 'test2', 'test3'],
       monthlyGoal: monthlyGoal ? monthlyGoal : 30,
       overview: overview ? overview : 'test',
+      category: category ? category : 'category',
       history: history ? history : [],
       achievements: achievements ? achievements : [],
       gallery: gallery ? gallery : []
