@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import createDataContext from './createDataContext';
-import serverApi from '../api/server';
+import API from '../api/server';
 import { navigate } from '../navigationRef';
 
 const authReducer = (state, action) => {
@@ -38,7 +38,7 @@ const signUp =
   async ({ email, password }) => {
     // implicit return, doesn't have to be specified
     try {
-      const response = await serverApi.post('/signup', { email, password });
+      const response = await API.post('/signup', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'authenticate', payload: response.data.token });
 
@@ -52,7 +52,7 @@ const signIn =
   (dispatch) =>
   async ({ email, password }) => {
     try {
-      const response = await serverApi.post('/signin', { email, password });
+      const response = await API.post('/signin', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'authenticate', payload: response.data.token });
 
