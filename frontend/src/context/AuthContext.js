@@ -11,7 +11,7 @@ const authReducer = (state, action) => {
       return { errorMessage: '', token: action.payload }; // we don't need to persist state; signin and signup are the same
     case 'clear_error_message':
       return { ...state, errorMessage: '' };
-    case 'signout':
+    case 'sign_out':
       return { token: null, errorMessage: '' };
     default:
       return state;
@@ -22,17 +22,18 @@ const clearErrorMessage = (dispatch) => () => {
   dispatch({ type: 'clear_error_message' });
 };
 
-const tryLocalSignin = (dispatch) => async () => {
+const tryLocalSignIn = (dispatch) => async () => {
   const token = await AsyncStorage.getItem('token');
+
   if (token) {
-    dispatch({ type: 'signin', payload: token });
+    dispatch({ type: 'authenticate', payload: token });
     navigate('mainFlow');
   } else {
-    navigate('Signin');
+    navigate('SignIn');
   }
 };
 
-const signup =
+const signUp =
   (dispatch) =>
   async ({ email, password }) => {
     // implicit return, doesn't have to be specified
@@ -47,7 +48,7 @@ const signup =
     }
   };
 
-const signin =
+const signIn =
   (dispatch) =>
   async ({ email, password }) => {
     try {
@@ -61,14 +62,14 @@ const signin =
     }
   };
 
-const signout = (dispatch) => async () => {
+const signOut = (dispatch) => async () => {
   await AsyncStorage.removeItem('token');
-  dispatch({ type: 'signout' });
+  dispatch({ type: 'sign_out' });
   navigate('loginFlow');
 };
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup, clearErrorMessage, tryLocalSignin },
+  { signIn, signOut, signUp, clearErrorMessage, tryLocalSignIn },
   { token: null, errorMessage: '' }
 );
