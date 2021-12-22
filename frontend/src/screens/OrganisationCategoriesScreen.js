@@ -12,7 +12,7 @@ const categories = [
 const OrganisationCategoriesScreen = ({ navigation }) => {
   const renderItem = ({ item }) => {
     return (
-      <View>
+      <View style={styles.listItem}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate({
@@ -23,7 +23,7 @@ const OrganisationCategoriesScreen = ({ navigation }) => {
             })
           }
         >
-          <Text>{item.name}</Text>
+          <Text style={styles.itemText}>{item.name}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -36,6 +36,8 @@ const OrganisationCategoriesScreen = ({ navigation }) => {
         data={categories}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        horizontal
+        style={styles.listContainer}
       />
       <Button title="List" onPress={() => navigation.navigate('OrganisationList')} />
     </View>
@@ -45,6 +47,23 @@ const OrganisationCategoriesScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1
+  },
+  listContainer: {
+    margin: 15
+  },
+  listItem: {
+    width: 250,
+    margin: 15,
+    backgroundColor: '#aaa',
+    justifyContent: 'center'
+  },
+  itemText: {
+    backgroundColor: '#bbb',
+    padding: 20,
+    width: 250,
+    justifyContent: 'center',
+    textAlign: 'center',
+    opacity: 0.8
   }
 });
 
