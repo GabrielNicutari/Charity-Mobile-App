@@ -1,50 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import OrganisationCategory from '../components/OrganisationCategory';
+import HealthCare from '../../assets/health-care.jpg';
+import SaveThePlanet from '../../assets/save-the-planet.jpg';
+import FightAgainstHunger from '../../assets/fight-against-hunger.jpg';
+import AnimalCare from '../../assets/animal-care.jpg';
 
 const categories = [
-  { id: 1, name: 'Health' },
-  { id: 2, name: 'Environment' },
-  { id: 3, name: 'Fight Against Hunger' },
-  { id: 4, name: 'Animal' }
+  { id: 1, name: 'Health Care', image: HealthCare },
+  { id: 2, name: 'Save The Planet', image: SaveThePlanet },
+  { id: 3, name: 'Fight Against Hunger', image: FightAgainstHunger },
+  { id: 4, name: 'Animal Care', image: AnimalCare }
 ];
 
-const OrganisationCategoriesScreen = ({ navigation }) => {
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate({
-              routeName: 'OrganisationList',
-              params: {
-                organisationCategory: item.name
-              }
-            })
-          }
-        >
-          <Text>{item.name}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
+const OrganisationCategoriesScreen = () => {
   return (
     <View style={styles.screen}>
-      <Text>The Organisation Categories Screen!</Text>
       <FlatList
         data={categories}
-        renderItem={renderItem}
+        renderItem={({ item }) => {
+          return <OrganisationCategory category={item} />;
+        }}
         keyExtractor={(item) => item.id}
+        horizontal
+        contentContainerStyle={{ alignItems: 'center' }}
+        showsHorizontalScrollIndicator={false}
       />
-      <Button title="List" onPress={() => navigation.navigate('OrganisationList')} />
     </View>
   );
 };
 
+OrganisationCategoriesScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
+};
+
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white'
   }
 });
 
