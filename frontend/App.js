@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -13,6 +13,16 @@ import { Provider as OrganisationProvider } from './src/context/OrganisationCont
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { setNavigator } from './src/navigationRef';
 import Loading from './src/screens/Loading';
+import * as Font from 'expo-font';
+import AppLoadingPlaceholder from 'expo/build/launch/AppLoadingPlaceholder';
+//import { AppLoading } from 'expo';
+
+const loadFonts = () => {
+  return Font.loadAsync({
+    'jakarta-regular': require('./assets/fonts/PlusJakartaSans-Regular.ttf'),
+    'jakarta-bold': require('./assets/fonts/PlusJakartaSans-Bold.ttf')
+  });
+};
 
 const organisationFlow = createStackNavigator({
   OrganisationCategories: OrganisationCategoriesScreen,
@@ -36,6 +46,18 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator);
 
 export default () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if (!fontLoaded) {
+    return (
+      <AppLoadingPlaceholder
+        startAsync={loadFonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.error(err)}
+      />
+    );
+  }
+
   return (
     <OrganisationProvider>
       <AuthProvider>
