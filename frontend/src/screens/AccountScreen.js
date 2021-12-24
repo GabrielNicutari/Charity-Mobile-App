@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const AccountScreen = (props) => {
   return (
@@ -7,6 +8,15 @@ const AccountScreen = (props) => {
       <Text>The Account Screen!</Text>
     </View>
   );
+};
+
+AccountScreen.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+    <Image
+      source={require('../../assets/user.png')}
+      style={[{ width: 30, height: 30 }, { tintColor: tintColor }]}
+    />
+  )
 };
 
 const styles = StyleSheet.create({
