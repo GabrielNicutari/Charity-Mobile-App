@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 
 const AccountScreen = (props) => {
   return (

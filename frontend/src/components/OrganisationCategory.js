@@ -7,7 +7,6 @@ import {
   useWindowDimensions
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import Spacer from './Spacer';
 import { withNavigation } from 'react-navigation';
 
 const OrganisationCategory = ({ navigation, category }) => {

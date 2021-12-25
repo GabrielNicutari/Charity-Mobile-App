@@ -16,7 +16,6 @@ import Loading from './src/screens/Loading';
 import * as Font from 'expo-font';
 import AppLoadingPlaceholder from 'expo/build/launch/AppLoadingPlaceholder';
 import { Image } from 'react-native';
-//import { AppLoading } from 'expo';
 
 const loadFonts = () => {
   return Font.loadAsync({

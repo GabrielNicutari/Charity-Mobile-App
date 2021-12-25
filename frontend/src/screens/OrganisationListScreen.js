@@ -1,21 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  FlatList,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Context as OrganisationContext } from '../context/OrganisationContext';
-import OrganisationCategory from '../components/OrganisationCategory';
 import Organisation from '../components/Organisation';
 import SectionText from '../components/SectionText';
+import GradientHeader from '../components/GradientHeader';
+import { SearchBar } from 'react-native-elements';
 
 const OrganisationListScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
+  const [keyword, setKeyword] = useState('');
   const { getOrganisations, state } = useContext(OrganisationContext);
 
   useEffect(() => {
@@ -32,16 +26,19 @@ const OrganisationListScreen = ({ navigation }) => {
     setLoading(false);
   };
 
-  console.log(state);
+  // console.log(state);
 
   //Will be used as data field for the FlatList when category field will be implemented in database
   const organisations = state.organisations.filter(
     (org) => org.category === navigation.getParam('organisationCategory')
   );
 
+  const getHeader = () => {
+    return <SectionText text="Organisations" />;
+  };
+
   return (
     <View style={styles.screen}>
-      <SectionText text="Organisations" />
       <Image
         source={require('../../assets/ellipse-blur.png')}
         style={styles.shadowRight}
@@ -50,6 +47,27 @@ const OrganisationListScreen = ({ navigation }) => {
         source={require('../../assets/ellipse-blue-blur.png')}
         style={styles.shadowLeft}
       />
+
+      <GradientHeader text={navigation.getParam('organisationCategory')}>
+        <SearchBar
+          placeholder="Browse for organisations"
+          value={keyword}
+          onChangeText={setKeyword}
+          lightTheme
+          round
+          inputContainerStyle={styles.searchBar}
+          containerStyle={{
+            backgroundColor: 'transparent',
+            borderBottomColor: 'transparent',
+            borderTopColor: 'transparent',
+            alignSelf: 'center'
+          }}
+          inputStyle={{ color: '#305F72' }}
+          showLoading
+          searchIcon={{ color: '#305F72' }}
+        />
+      </GradientHeader>
+
       {loading ? (
         <Text>Loading data...</Text>
       ) : state.organisations.length === 0 ? (
@@ -61,11 +79,19 @@ const OrganisationListScreen = ({ navigation }) => {
             return <Organisation organisation={item} />;
           }}
           keyExtractor={(item) => item._id}
-          contentContainerStyle={{ flex: 1 }}
+          contentContainerStyle={{ flexGrow: 1, marginTop: 50 }}
+          keyboardShouldPersistTaps="always"
+          ListHeaderComponent={getHeader}
         />
       )}
     </View>
   );
+};
+
+OrganisationListScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
 };
 
 const styles = StyleSheet.create({
@@ -83,6 +109,10 @@ const styles = StyleSheet.create({
     left: 0,
     opacity: 0.5,
     top: -120
+  },
+  searchBar: {
+    width: 315,
+    backgroundColor: 'white'
   }
 });
 

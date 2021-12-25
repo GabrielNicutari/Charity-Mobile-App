@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     elevation: 10,
     backgroundColor: 'white',
     overflow: 'hidden',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 5
   },
   logoContainer: {
     width: 110,
