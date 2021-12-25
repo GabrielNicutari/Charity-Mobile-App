@@ -4,6 +4,8 @@ import { Text } from 'react-native-elements';
 import Spacer from './Spacer';
 import { withNavigation } from 'react-navigation';
 import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
+import RegularText from './RegularText';
+import BoldText from './BoldText';
 
 const Organisation = ({ navigation, organisation }) => {
   return (
@@ -27,17 +29,22 @@ const Organisation = ({ navigation, organisation }) => {
           </View>
 
           <View style={styles.infoSection}>
-            <Text style={styles.text}>{organisation.name}</Text>
+            <BoldText style={{ fontSize: 14 }}>{organisation.name}</BoldText>
 
-            <Text style={styles.text}>{organisation.motto}</Text>
+            <RegularText style={{ fontSize: 13 }}>{organisation.motto}</RegularText>
 
-            {/*<SimpleGradientProgressbarView*/}
-            {/*  fromColor="#FF0000"*/}
-            {/*  toColor="#0000FF"*/}
-            {/*  progress={0.5}*/}
-            {/*  maskedCorners={[0, 0, 1, 1]}*/}
-            {/*  cornerRadius={7.0}*/}
-            {/*/>*/}
+            <View style={{ flexDirection: 'row' }}>
+              <RegularText style={{ position: 'absolute', left: 0, fontSize: 10 }}>
+                Amount raised so far:
+                <BoldText style={{ color: '#FF8900', fontSize: 12 }}>10</BoldText>
+              </RegularText>
+              <RegularText style={{ position: 'absolute', left: 130, fontSize: 10 }}>
+                Our Goal:
+                <BoldText style={{ color: '#FF8900', fontSize: 12 }}>
+                  {organisation.monthlyGoal}
+                </BoldText>
+              </RegularText>
+            </View>
           </View>
         </View>
       </TouchableNativeFeedback>
@@ -46,10 +53,13 @@ const Organisation = ({ navigation, organisation }) => {
 };
 
 const styles = StyleSheet.create({
-  text: {
+  title: {
     color: '#333E63',
     fontSize: 14,
-    fontFamily: 'jakarta-regular'
+    fontFamily: 'jakarta-bold'
+  },
+  info: {
+    fontSize: 10
   },
   container: {
     height: 100,
@@ -65,19 +75,18 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   logoContainer: {
-    width: 110,
-    // borderColor: 'blue',
-    // borderWidth: 2,
+    width: 105,
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
     overflow: 'hidden'
   },
   logo: {
-    width: 110,
+    width: 105,
     height: 100
   },
   infoSection: {
-    marginLeft: 20
+    marginLeft: 10,
+    paddingVertical: 5
   },
   shadow: {
     position: 'absolute',
