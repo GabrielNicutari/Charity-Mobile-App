@@ -1,10 +1,18 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, View, Image } from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Image,
+  useWindowDimensions
+} from 'react-native';
 import { Text } from 'react-native-elements';
 import Spacer from './Spacer';
 import { withNavigation } from 'react-navigation';
 
 const OrganisationCategory = ({ navigation, category }) => {
+  const { width } = useWindowDimensions();
+
   return (
     <>
       <TouchableOpacity
@@ -16,11 +24,17 @@ const OrganisationCategory = ({ navigation, category }) => {
             }
           })
         }
+        delayPressIn={30}
       >
-        <View style={styles.container}>
-          <Image source={category.image} style={styles.image} />
+        <View style={[styles.container, { width }]}>
+          <Image
+            source={category.image}
+            style={[styles.image, { width, resizeMode: 'contain' }]}
+          />
 
-          <Text style={styles.text}>{category.name}</Text>
+          <View style={{ flex: 0.1 }}>
+            <Text style={styles.text}>{category.name}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </>
@@ -36,11 +50,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 360
+    flex: 1,
+    marginTop: 40
   },
   image: {
-    width: '100%',
-    height: 350
+    flex: 0.6,
+    justifyContent: 'center'
   }
 });
 
