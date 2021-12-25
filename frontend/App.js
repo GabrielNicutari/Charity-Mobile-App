@@ -70,23 +70,26 @@ const switchNavigator = createSwitchNavigator({
         showIcon: true,
         showLabel: false,
         style: {
-          // backgroundColor: 'white',
           // shadowOffset: { width: 2, height: 2 },
-          shadowColor: 'red',
+          // shadowColor: 'red',
           // shadowOpacity: 1,
           // shadowRadius: 15,
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
+          borderBottomLeftRadius: 25,
+          borderBottomRightRadius: 25,
           elevation: 5,
-          zIndex: 5,
+          // zIndex: 5,
           height: 60,
           borderTopWidth: 0,
-          borderTopColor: 'transparent'
-        },
-        activeTabStyle: {
-          backgroundColor: 'white',
-          borderBottomWidth: 4,
-          borderColor: '#6C1D7C'
+          borderTopColor: 'transparent',
+          overflow: 'hidden',
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          width: '98%',
+          alignSelf: 'center'
         }
       }
     }
