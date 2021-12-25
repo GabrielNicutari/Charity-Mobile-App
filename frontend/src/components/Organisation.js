@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Image,
-  TouchableNativeFeedback
-} from 'react-native';
+import { StyleSheet, View, Image, TouchableNativeFeedback } from 'react-native';
 import { Text } from 'react-native-elements';
 import Spacer from './Spacer';
 import { withNavigation } from 'react-navigation';
@@ -14,6 +8,7 @@ import SimpleGradientProgressbarView from 'react-native-simple-gradient-progress
 const Organisation = ({ navigation, organisation }) => {
   return (
     <Spacer>
+      <Image source={require('../../assets/rectangle-blur.png')} style={styles.shadow} />
       <TouchableNativeFeedback
         onPress={() =>
           navigation.navigate({
@@ -82,6 +77,10 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     marginLeft: 20
+  },
+  shadow: {
+    position: 'absolute',
+    alignSelf: 'center'
   }
 });
 

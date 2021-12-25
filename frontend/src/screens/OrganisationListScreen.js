@@ -1,5 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  FlatList,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Context as OrganisationContext } from '../context/OrganisationContext';
 import OrganisationCategory from '../components/OrganisationCategory';
@@ -34,7 +42,14 @@ const OrganisationListScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <SectionText text="Organisations" />
-
+      <Image
+        source={require('../../assets/ellipse-blur.png')}
+        style={styles.shadowRight}
+      />
+      <Image
+        source={require('../../assets/ellipse-blue-blur.png')}
+        style={styles.shadowLeft}
+      />
       {loading ? (
         <Text>Loading data...</Text>
       ) : state.organisations.length === 0 ? (
@@ -57,6 +72,17 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: 'white'
+  },
+  shadowRight: {
+    position: 'absolute',
+    right: 0,
+    bottom: -150
+  },
+  shadowLeft: {
+    position: 'absolute',
+    left: 0,
+    opacity: 0.5,
+    top: -120
   }
 });
 
