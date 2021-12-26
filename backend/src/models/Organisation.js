@@ -16,6 +16,7 @@ const organisationSchema = new Schema({
     required: true
   },
   keywords: { type: [String], validate: (arr) => Array.isArray(arr) && arr.length > 0 },
+  totalProgress: Number,
   monthlyGoal: {
     type: Number,
     required: true
@@ -24,7 +25,6 @@ const organisationSchema = new Schema({
     type: String,
     required: true
   },
-  currentAmount: Number,
   overview: {
     type: String,
     required: true

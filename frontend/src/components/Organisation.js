@@ -32,18 +32,30 @@ const Organisation = ({ navigation, organisation }) => {
           <View style={styles.infoSection}>
             <BoldText style={{ fontSize: 14 }}>{organisation.name}</BoldText>
 
-            <RegularText style={{ fontSize: 13 }}>{organisation.motto}</RegularText>
+            <RegularText style={{ fontSize: 13, marginBottom: 10 }}>
+              {organisation.motto}
+            </RegularText>
 
-            <ProgressBar step={300} steps={500} height={10} />
+            <ProgressBar
+              step={organisation.totalProgress ? organisation.totalProgress : 10}
+              steps={organisation.monthlyGoal ? organisation.monthlyGoal : 11}
+              height={10}
+            />
 
             <View style={{ flexDirection: 'row' }}>
-              <RegularText style={{ position: 'absolute', left: 0, fontSize: 10 }}>
+              <RegularText
+                style={{ position: 'absolute', left: 0, top: 0, fontSize: 10 }}
+              >
                 Amount raised so far:
-                <BoldText style={{ color: '#FF8900', fontSize: 12 }}>10</BoldText>
+                <BoldText style={{ color: '#FF8900', fontSize: 11 }}>
+                  {organisation.totalProgress}
+                </BoldText>
               </RegularText>
-              <RegularText style={{ position: 'absolute', left: 130, fontSize: 10 }}>
+              <RegularText
+                style={{ position: 'absolute', left: 130, top: 0, fontSize: 10 }}
+              >
                 Our Goal:
-                <BoldText style={{ color: '#FF8900', fontSize: 12 }}>
+                <BoldText style={{ color: '#FF8900', fontSize: 11 }}>
                   {organisation.monthlyGoal}
                 </BoldText>
               </RegularText>
@@ -85,13 +97,17 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 105,
-    height: 100
+    height: 100,
+    resizeMode: 'cover'
   },
   infoSection: {
-    marginLeft: 10,
+    marginLeft: 5,
+    marginTop: -20,
     paddingVertical: 5,
     flex: 1,
-    paddingRight: 10
+    paddingRight: 10,
+    alignSelf: 'center',
+    justifyContent: 'center'
   },
   shadow: {
     position: 'absolute',

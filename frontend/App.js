@@ -15,6 +15,7 @@ import { setNavigator } from './src/navigationRef';
 import Loading from './src/screens/Loading';
 import * as Font from 'expo-font';
 import AppLoadingPlaceholder from 'expo/build/launch/AppLoadingPlaceholder';
+import TabBar from './src/components/TabBar';
 import { Image } from 'react-native';
 
 const loadFonts = () => {
@@ -41,10 +42,12 @@ organisationFlow.navigationOptions = ({ navigation }) => {
 
   return {
     tabBarIcon: ({ tintColor }) => (
+      // <TabBar tintColor={tintColor}>
       <Image
         source={require('./assets/home.png')}
-        style={[{ width: 35, height: 35 }, { tintColor: tintColor }]}
+        style={[{ width: 35, height: 35, alignSelf: 'center' }, { tintColor: tintColor }]}
       />
+      // </TabBar>
     ),
     tabBarVisible
   };

@@ -79,7 +79,7 @@ const OrganisationListScreen = ({ navigation }) => {
             return <Organisation organisation={item} />;
           }}
           keyExtractor={(item) => item._id}
-          contentContainerStyle={{ flexGrow: 1, marginTop: 50 }}
+          contentContainerStyle={{ flexGrow: 1, marginTop: 50, paddingBottom: 110 }}
           keyboardShouldPersistTaps="always"
           ListHeaderComponent={getHeader}
         />
