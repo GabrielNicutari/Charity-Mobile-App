@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
 import RegularText from './RegularText';
 import BoldText from './BoldText';
+import ProgressBar from './ProgressBar';
 
 const Organisation = ({ navigation, organisation }) => {
   return (
@@ -32,6 +33,8 @@ const Organisation = ({ navigation, organisation }) => {
             <BoldText style={{ fontSize: 14 }}>{organisation.name}</BoldText>
 
             <RegularText style={{ fontSize: 13 }}>{organisation.motto}</RegularText>
+
+            <ProgressBar step={300} steps={500} height={10} />
 
             <View style={{ flexDirection: 'row' }}>
               <RegularText style={{ position: 'absolute', left: 0, fontSize: 10 }}>
@@ -86,7 +89,9 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     marginLeft: 10,
-    paddingVertical: 5
+    paddingVertical: 5,
+    flex: 1,
+    paddingRight: 10
   },
   shadow: {
     position: 'absolute',
