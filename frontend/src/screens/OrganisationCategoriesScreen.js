@@ -1,69 +1,82 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import React, { useRef, useState } from 'react';
+import { View, StyleSheet, FlatList, Animated } from 'react-native';
+import OrganisationCategory from '../components/OrganisationCategory';
+import HealthCare from '../../assets/health-care.jpg';
+import SaveThePlanet from '../../assets/save-the-planet.jpg';
+import FightAgainstHunger from '../../assets/fight-against-hunger.jpg';
+import AnimalCare from '../../assets/animal-care.jpg';
+import Paginator from '../components/Paginator';
 
 const categories = [
-  { id: 1, name: 'Health' },
-  { id: 2, name: 'Environment' },
-  { id: 3, name: 'Fight Against Hunger' },
-  { id: 4, name: 'Animal' }
+  { id: 1, name: 'Health Care', image: HealthCare },
+  { id: 2, name: 'Save The Planet', image: SaveThePlanet },
+  { id: 3, name: 'Fight Against Hunger', image: FightAgainstHunger },
+  { id: 4, name: 'Animal Care', image: AnimalCare }
 ];
 
-const OrganisationCategoriesScreen = ({ navigation }) => {
-  const renderItem = ({ item }) => {
-    return (
-      <View style={styles.listItem}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate({
-              routeName: 'OrganisationList',
-              params: {
-                organisationCategory: item.name
-              }
-            })
-          }
-        >
-          <Text style={styles.itemText}>{item.name}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+const OrganisationCategoriesScreen = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const slidesRef = useRef(null);
+
+  const viewableItemsChanged = useRef(({ viewableItems }) => {
+    setCurrentIndex(viewableItems[0].index);
+  }).current;
+
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
   return (
     <View style={styles.screen}>
-      <Text>The Organisation Categories Screen!</Text>
-      <FlatList
-        data={categories}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        horizontal
-        style={styles.listContainer}
-      />
-      <Button title="List" onPress={() => navigation.navigate('OrganisationList')} />
+      <View style={{ flex: 0.9 }}>
+        <FlatList
+          data={categories}
+          renderItem={({ item }) => {
+            return <OrganisationCategory category={item} />;
+          }}
+          keyExtractor={(item) => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          bounces={false}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: scrollX
+                  }
+                }
+              }
+            ],
+            {
+              useNativeDriver: false
+            }
+          )}
+          scrollEventThrottle={32}
+          onViewableItemsChanged={viewableItemsChanged}
+          viewabilityConfig={viewConfig}
+          ref={slidesRef}
+        />
+      </View>
+
+      <Paginator data={categories} scrollX={scrollX} />
     </View>
   );
 };
 
+OrganisationCategoriesScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
+};
+
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
-  },
-  listContainer: {
-    margin: 15
-  },
-  listItem: {
-    width: 250,
-    margin: 15,
-    backgroundColor: '#aaa',
-    justifyContent: 'center'
-  },
-  itemText: {
-    backgroundColor: '#bbb',
-    padding: 20,
-    width: 250,
+    flex: 1,
+    backgroundColor: 'white',
     justifyContent: 'center',
-    textAlign: 'center',
-    opacity: 0.8
+    alignItems: 'center',
+    marginBottom: 30
   }
 });
 

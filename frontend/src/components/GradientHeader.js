@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import { Button, Text } from 'react-native-elements';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Spacer from './Spacer';
+import { Ionicons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
 
-const GradientHeader = ({ text, height, marginBottom, center, children }) => {
+const GradientHeader = ({ text, height, marginBottom, center, children, navigation }) => {
   return (
     <LinearGradient
       style={[
@@ -13,12 +14,27 @@ const GradientHeader = ({ text, height, marginBottom, center, children }) => {
         marginBottom ? { marginBottom } : null,
         center ? { alignItems: 'center' } : null
       ]}
-      colors={['#ed1c24', '#f26522']}
-      end={{ x: 1, y: 1 }}
+      colors={['#5E8DEC', '#2E66DC']}
+      end={{ x: 0, y: 1 }}
     >
       {text ? (
         <Spacer>
-          <Text style={styles.title}>{text}</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={{
+                marginRight: 20
+              }}
+            >
+              <Ionicons name="arrow-back" size={28} color="white" />
+            </TouchableOpacity>
+            <Text style={styles.title}>{text}</Text>
+          </View>
         </Spacer>
       ) : null}
 
@@ -30,17 +46,19 @@ const GradientHeader = ({ text, height, marginBottom, center, children }) => {
 const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
-    // alignItems: 'center',
-    height: 150,
+    height: 190,
     width: '100%',
     borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50
+    borderBottomRightRadius: 50,
+    marginBottom: -50,
+    elevation: 5
   },
   title: {
-    fontSize: 36,
+    fontSize: 20,
     color: 'white',
-    fontWeight: 'bold'
+    fontFamily: 'jakarta-bold',
+    lineHeight: 20
   }
 });
 
-export default GradientHeader;
+export default withNavigation(GradientHeader);

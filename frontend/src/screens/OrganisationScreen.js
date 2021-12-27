@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const OrganisationScreen = () => {
+const OrganisationScreen = ({ navigation }) => {
+  const organisation = navigation.getParam('organisation');
+
   return (
     <View style={styles.screen}>
-      <Text>The Organisation Screen!</Text>
+      <Text>{organisation.name}</Text>
+      <Text>{organisation.category}</Text>
+      <Text>{organisation.motto}</Text>
+      <Text>{organisation.overview}</Text>
     </View>
   );
 };
