@@ -10,28 +10,45 @@ import { SearchBar } from 'react-native-elements';
 const OrganisationListScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState('');
+  const [masterData, setMasterData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const { getOrganisations, state } = useContext(OrganisationContext);
 
   useEffect(() => {
-    fetchData().then(console.log('data fetched!'));
+    fetchData();
   }, []);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      getOrganisations();
+      await getOrganisations();
     } catch (error) {
       console.log('ERROR\n' + error);
     }
     setLoading(false);
   };
 
-  // console.log(state);
+  useEffect(() => {
+    setMasterData(
+      state.organisations.filter(
+        (org) => org.category === navigation.getParam('organisationCategory')
+      )
+    );
+  }, [state.organisations]);
 
-  //Will be used as data field for the FlatList when category field will be implemented in database
-  const organisations = state.organisations.filter(
-    (org) => org.category === navigation.getParam('organisationCategory')
-  );
+  useEffect(() => {
+    setFilteredData(masterData);
+  }, [masterData]);
+
+  useEffect(() => {
+    handleSearch(keyword);
+  }, [keyword]);
+
+  const handleSearch = (text) => {
+    setFilteredData(
+      masterData.filter((org) => org.name.toLowerCase().includes(text.toLowerCase()))
+    );
+  };
 
   const getHeader = () => {
     return <SectionText text="Organisations" />;
@@ -74,9 +91,9 @@ const OrganisationListScreen = ({ navigation }) => {
         <Text>No organisation!</Text>
       ) : (
         <FlatList
-          data={organisations}
-          renderItem={({ item }) => {
-            return <Organisation organisation={item} />;
+          data={filteredData}
+          renderItem={({ item, index }) => {
+            return <Organisation organisation={item} index={index} />;
           }}
           keyExtractor={(item) => item._id}
           contentContainerStyle={{ flexGrow: 1, marginTop: 50, paddingBottom: 110 }}

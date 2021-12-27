@@ -7,62 +7,75 @@ import SimpleGradientProgressbarView from 'react-native-simple-gradient-progress
 import RegularText from './RegularText';
 import BoldText from './BoldText';
 import ProgressBar from './ProgressBar';
+import * as Animatable from 'react-native-animatable';
 
-const Organisation = ({ navigation, organisation }) => {
+const Organisation = ({ navigation, organisation, index }) => {
   return (
     <Spacer>
-      <Image source={require('../../assets/rectangle-blur.png')} style={styles.shadow} />
-      <TouchableNativeFeedback
-        onPress={() =>
-          navigation.navigate({
-            routeName: 'Organisation',
-            params: {
-              organisation: organisation
-            }
-          })
-        }
-        background={TouchableNativeFeedback.Ripple('rgba(90,90,90,0.15)', false)}
-        useForeground={true}
+      <Animatable.View
+        animation="bounceIn"
+        duration={1000}
+        delay={index * 100}
+        easing="ease"
+        useNativeDriver={true}
       >
-        <View style={styles.container}>
-          <View style={styles.logoContainer}>
-            <Image source={{ uri: organisation.bannerImage }} style={styles.logo} />
-          </View>
+        <Image
+          source={require('../../assets/rectangle-blur.png')}
+          style={styles.shadow}
+        />
 
-          <View style={styles.infoSection}>
-            <BoldText style={{ fontSize: 14 }}>{organisation.name}</BoldText>
+        <TouchableNativeFeedback
+          onPress={() =>
+            navigation.navigate({
+              routeName: 'Organisation',
+              params: {
+                organisation: organisation
+              }
+            })
+          }
+          background={TouchableNativeFeedback.Ripple('rgba(90,90,90,0.15)', false)}
+          useForeground={true}
+        >
+          <View style={styles.container}>
+            <View style={styles.logoContainer}>
+              <Image source={{ uri: organisation.bannerImage }} style={styles.logo} />
+            </View>
 
-            <RegularText style={{ fontSize: 13, marginBottom: 10 }}>
-              {organisation.motto}
-            </RegularText>
+            <View style={styles.infoSection}>
+              <BoldText style={{ fontSize: 14 }}>{organisation.name}</BoldText>
 
-            <ProgressBar
-              step={organisation.totalProgress ? organisation.totalProgress : 10}
-              steps={organisation.monthlyGoal ? organisation.monthlyGoal : 11}
-              height={10}
-            />
-
-            <View style={{ flexDirection: 'row' }}>
-              <RegularText
-                style={{ position: 'absolute', left: 0, top: 0, fontSize: 10 }}
-              >
-                Amount raised so far:
-                <BoldText style={{ color: '#FF8900', fontSize: 11 }}>
-                  {organisation.totalProgress}
-                </BoldText>
+              <RegularText style={{ fontSize: 13, marginBottom: 10 }}>
+                {organisation.motto}
               </RegularText>
-              <RegularText
-                style={{ position: 'absolute', left: 130, top: 0, fontSize: 10 }}
-              >
-                Our Goal:
-                <BoldText style={{ color: '#FF8900', fontSize: 11 }}>
-                  {organisation.monthlyGoal}
-                </BoldText>
-              </RegularText>
+
+              <ProgressBar
+                step={organisation.totalProgress ? organisation.totalProgress : 10}
+                steps={organisation.monthlyGoal ? organisation.monthlyGoal : 11}
+                height={10}
+              />
+
+              <View style={{ flexDirection: 'row' }}>
+                <RegularText
+                  style={{ position: 'absolute', left: 0, top: 0, fontSize: 10 }}
+                >
+                  Amount raised so far:
+                  <BoldText style={{ color: '#FF8900', fontSize: 11 }}>
+                    {organisation.totalProgress}
+                  </BoldText>
+                </RegularText>
+                <RegularText
+                  style={{ position: 'absolute', left: 130, top: 0, fontSize: 10 }}
+                >
+                  Our Goal:
+                  <BoldText style={{ color: '#FF8900', fontSize: 11 }}>
+                    {organisation.monthlyGoal}
+                  </BoldText>
+                </RegularText>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableNativeFeedback>
+        </TouchableNativeFeedback>
+      </Animatable.View>
     </Spacer>
   );
 };
