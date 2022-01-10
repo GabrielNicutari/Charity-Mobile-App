@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
-import { Context } from '../context/AuthContext';
+import { Context as AuthContext } from '../context/AuthContext';
 import { NavigationEvents } from 'react-navigation';
 import GradientHeader from '../components/GradientHeader';
 
 const SignInScreen = () => {
-  const { state, signIn, clearErrorMessage } = useContext(Context);
+  const { state, signIn, clearErrorMessage } = useContext(AuthContext);
 
   return (
     <KeyboardAvoidingView>

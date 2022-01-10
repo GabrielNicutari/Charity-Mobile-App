@@ -17,6 +17,7 @@ import * as Font from 'expo-font';
 import AppLoadingPlaceholder from 'expo/build/launch/AppLoadingPlaceholder';
 import TabBar from './src/components/TabBar';
 import { Image } from 'react-native';
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 const loadFonts = () => {
   return Font.loadAsync({
@@ -116,11 +117,17 @@ export default () => {
   return (
     <OrganisationProvider>
       <AuthProvider>
-        <App
-          ref={(navigator) => {
-            setNavigator(navigator);
-          }}
-        />
+        <StripeProvider
+          publishableKey="pk_test_51KEeFiCekVxjH41Gd6rZAkT06bmX0XR7eHURc3ifzp2xV9z39e420ZO2cEdwGmcCqKvSd1YkiKjvgqeeW62Zmxox006RHRdRMI"
+          // urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+          // merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
+        >
+          <App
+            ref={(navigator) => {
+              setNavigator(navigator);
+            }}
+          />
+        </StripeProvider>
       </AuthProvider>
     </OrganisationProvider>
   );
