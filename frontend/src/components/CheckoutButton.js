@@ -22,7 +22,6 @@ export default function CheckoutScreen() {
       }
     );
 
-    console.log(response.data);
     const { paymentIntent, ephemeralKey, customer } = await response.data;
 
     return {
@@ -42,8 +41,10 @@ export default function CheckoutScreen() {
       paymentIntentClientSecret: paymentIntent,
       // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
       //methods that complete payment after a delay, like SEPA Debit and Sofort.
-      allowsDelayedPaymentMethods: true
+      allowsDelayedPaymentMethods: true,
+      merchantDisplayName: 'Merchant'
     });
+
     if (!error) {
       setLoading(true);
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -18,11 +18,15 @@ import AppLoadingPlaceholder from 'expo/build/launch/AppLoadingPlaceholder';
 import TabBar from './src/components/TabBar';
 import { Image } from 'react-native';
 import { StripeProvider } from '@stripe/stripe-react-native';
+import API from './src/api/server';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const loadFonts = () => {
   return Font.loadAsync({
     'jakarta-regular': require('./assets/fonts/PlusJakartaSans-Regular.ttf'),
-    'jakarta-bold': require('./assets/fonts/PlusJakartaSans-Bold.ttf')
+    'jakarta-bold': require('./assets/fonts/PlusJakartaSans-Bold.ttf'),
+    'jakarta-italic': require('./assets/fonts/PlusJakartaSans-Italic.ttf'),
+    'jakarta-bold-italic': require('./assets/fonts/PlusJakartaSans-BoldItalic.ttf')
   });
 };
 
@@ -103,6 +107,23 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [publishableKey, setPublishableKey] = useState('');
+
+  const fetchPublishableKey = async () => {
+    const token = await AsyncStorage.getItem('token');
+
+    const response = await API.get('/stripe-key', {
+      headers: {
+        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+      }
+    });
+
+    setPublishableKey(response.data.publishableKey);
+  };
+
+  useEffect(() => {
+    fetchPublishableKey();
+  }, []);
 
   if (!fontLoaded) {
     return (
@@ -115,20 +136,21 @@ export default () => {
   }
 
   return (
-    <OrganisationProvider>
-      <AuthProvider>
-        <StripeProvider
-          publishableKey="pk_test_51KEeFiCekVxjH41Gd6rZAkT06bmX0XR7eHURc3ifzp2xV9z39e420ZO2cEdwGmcCqKvSd1YkiKjvgqeeW62Zmxox006RHRdRMI"
-          // urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
-          // merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
-        >
+    <StripeProvider
+      publishableKey={publishableKey}
+      enableGooglePay={true}
+      // urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+      // merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
+    >
+      <OrganisationProvider>
+        <AuthProvider>
           <App
             ref={(navigator) => {
               setNavigator(navigator);
             }}
           />
-        </StripeProvider>
-      </AuthProvider>
-    </OrganisationProvider>
+        </AuthProvider>
+      </OrganisationProvider>
+    </StripeProvider>
   );
 };
