@@ -11,6 +11,10 @@ const organisationSchema = new Schema({
     type: String,
     required: true
   },
+  logo: {
+    type: String,
+    required: true
+  },
   motto: {
     type: String,
     required: true
@@ -29,7 +33,7 @@ const organisationSchema = new Schema({
     type: String,
     required: true
   },
-  history: [{ event: String }],
+  history: { type: [String] },
   achievements: [{ achievement: String }],
   gallery: [{ picture: String }]
 });
