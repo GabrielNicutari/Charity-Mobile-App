@@ -122,7 +122,7 @@ export default () => {
   };
 
   useEffect(() => {
-    fetchPublishableKey();
+    fetchPublishableKey().then();
   }, []);
 
   if (!fontLoaded) {
