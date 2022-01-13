@@ -20,6 +20,7 @@ import ItalicText from '../components/BoldItalicText';
 import SectionText from '../components/SectionText';
 import ReadMore from 'react-native-read-more-text';
 import Goal from '../components/Goal';
+import Gallery from '../components/Gallery';
 
 const OrganisationScreen = ({ navigation }) => {
   const organisation = navigation.getParam('organisation');
@@ -138,6 +139,10 @@ const OrganisationScreen = ({ navigation }) => {
         </Spacer>
 
         <SectionText>Gallery</SectionText>
+
+        <View style={styles.galleryContainer}>
+          <Gallery images={organisation.gallery} />
+        </View>
       </View>
     );
   };
@@ -177,6 +182,11 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10
+  },
+  galleryContainer: {
+    width: '100%',
+    height: 250
+    // backgroundColor: '#fa9b18'
   }
 });
 

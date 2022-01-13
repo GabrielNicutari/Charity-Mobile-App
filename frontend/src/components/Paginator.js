@@ -1,7 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, Animated, useWindowDimensions } from 'react-native';
 
-const Paginator = ({ data, scrollX }) => {
+const Paginator = ({
+  data,
+  scrollX,
+  position,
+  bottom,
+  color,
+  borderColor,
+  borderWidth
+}) => {
   const { width } = useWindowDimensions();
 
   return (
@@ -9,7 +17,9 @@ const Paginator = ({ data, scrollX }) => {
       style={{
         flexDirection: 'row',
         height: 64,
-        alignItems: 'center'
+        alignItems: 'center',
+        position: position,
+        bottom: bottom
       }}
     >
       {data.map((_, i) => {
@@ -29,7 +39,16 @@ const Paginator = ({ data, scrollX }) => {
 
         return (
           <Animated.View
-            style={[styles.dot, { width: dotWidth, opacity }]}
+            style={[
+              styles.dot,
+              {
+                width: dotWidth,
+                opacity,
+                backgroundColor: color ? color : '#333E63',
+                borderColor: borderColor,
+                borderWidth: borderWidth
+              }
+            ]}
             key={i.toString()}
           />
         );

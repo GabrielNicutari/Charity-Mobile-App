@@ -25,17 +25,20 @@ const Goal = ({ goal, description }) => {
             }}
             animation={{
               0: {
-                rotate: open ? '0deg' : '-180deg',
-                color: 'rgba(0,0,0,0.6)'
+                rotate: open ? '0deg' : '-180deg'
               },
               1: {
-                rotate: open ? '-180deg' : '0deg',
-                color: 'rgba(255, 87, 34, 0.5)'
+                rotate: open ? '-180deg' : '0deg'
               }
             }}
             duration={300}
           >
-            <MaterialCommunityIcons name="chevron-up-circle" size={32} color="#71788E" />
+            <MaterialCommunityIcons
+              name="chevron-up-circle"
+              size={32}
+              // color="#71788E"
+              style={{ color: open ? '#ff6a00' : '#71788E' }}
+            />
           </Animatable.View>
         </View>
       </TouchableOpacity>
