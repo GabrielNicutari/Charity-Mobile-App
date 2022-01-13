@@ -133,4 +133,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(OrganisationListScreen);
+export default OrganisationListScreen;
