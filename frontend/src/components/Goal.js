@@ -17,8 +17,8 @@ const Goal = ({ goal, description }) => {
           <BoldText style={styles.text}>{goal}</BoldText>
           <Animatable.View
             style={{
-              position: 'absolute',
-              right: 15,
+              // position: 'absolute',
+              // right: 15,
               justifyContent: 'center',
               alignItems: 'center',
               transform: [{ rotate: '100deg' }]
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAEFE9',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     padding: 10,
     paddingHorizontal: 20
   },
