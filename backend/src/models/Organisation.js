@@ -35,7 +35,7 @@ const organisationSchema = new Schema({
   },
   facts: { type: [String] },
   goals: [{ goal: String, description: String }],
-  gallery: [{ picture: String }]
+  gallery: { type: [String] }
 });
 
 module.exports = mongoose.model('Organisation', organisationSchema);
