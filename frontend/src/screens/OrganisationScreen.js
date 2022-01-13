@@ -4,7 +4,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  FlatList
+  FlatList,
+  Linking,
+  Text
 } from 'react-native';
 import CheckoutButton from '../components/CheckoutButton';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,8 +15,11 @@ import RegularText from '../components/RegularText';
 import Keyword from '../components/Keyword';
 import ProgressBar from '../components/ProgressBar';
 import BoldText from '../components/BoldText';
-import HistoryItem from '../components/HistoryItem';
+import Fact from '../components/Fact';
 import ItalicText from '../components/BoldItalicText';
+import SectionText from '../components/SectionText';
+import ReadMore from 'react-native-read-more-text';
+import Goal from '../components/Goal';
 
 const OrganisationScreen = ({ navigation }) => {
   const organisation = navigation.getParam('organisation');
@@ -23,7 +28,13 @@ const OrganisationScreen = ({ navigation }) => {
     return (
       <>
         <ImageBackground
-          style={{ width: '100%', height: 250, borderRadius: 10 }}
+          style={{
+            width: '100%',
+            height: 260,
+            borderRadius: 10,
+            position: 'absolute',
+            top: 0
+          }}
           source={{
             uri: `${organisation.bannerImage}`
           }}
@@ -37,7 +48,16 @@ const OrganisationScreen = ({ navigation }) => {
               top: 40
             }}
           >
-            <Ionicons name="arrow-back" size={28} color="white" />
+            <Ionicons
+              name="arrow-back"
+              size={28}
+              color="white"
+              style={{
+                textShadowColor: '#232c38',
+                textShadowOffset: { width: -1, height: 1 },
+                textShadowRadius: 10
+              }}
+            />
           </TouchableOpacity>
 
           <BoldText
@@ -46,7 +66,7 @@ const OrganisationScreen = ({ navigation }) => {
               elevation: 2,
               zIndex: 2,
               position: 'absolute',
-              bottom: 10,
+              bottom: 30,
               left: 20,
               fontSize: 32,
               textShadowColor: '#232c38',
@@ -58,65 +78,85 @@ const OrganisationScreen = ({ navigation }) => {
           </BoldText>
         </ImageBackground>
 
-        <Spacer>
-          <ItalicText>{organisation.motto}</ItalicText>
-        </Spacer>
+        <View
+          style={{
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            marginTop: 235,
+            backgroundColor: 'white'
+          }}
+        >
+          <Spacer>
+            <ItalicText>{organisation.motto}</ItalicText>
+          </Spacer>
+
+          <FlatList
+            data={organisation.keywords}
+            horizontal
+            renderItem={({ item }) => {
+              return <Keyword keyword={item} />;
+            }}
+            keyExtractor={(item) => item}
+            style={{ paddingLeft: 20 }}
+            showsHorizontalScrollIndicator={false}
+          />
+
+          <SectionText>Overview</SectionText>
+          <Spacer>
+            <ReadMore numberOfLines={6}>
+              <RegularText>{organisation.overview}</RegularText>
+            </ReadMore>
+          </Spacer>
+
+          <SectionText>Key Facts</SectionText>
+        </View>
+      </>
+    );
+  };
+
+  const getFooter = () => {
+    return (
+      <View style={{ backgroundColor: 'white' }}>
+        <SectionText>Our Mission</SectionText>
 
         <FlatList
-          data={organisation.keywords}
-          horizontal
+          data={organisation.goals}
           renderItem={({ item }) => {
-            return <Keyword keyword={item} />;
+            return <Goal goal={item.goal} description={item.description} />;
           }}
-          keyExtractor={(item) => item}
-          style={{ paddingLeft: 20 }}
-          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.goal}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ backgroundColor: 'white' }}
         />
 
         <Spacer>
-          <BoldText style={styles.sectionTitle}>Progress</BoldText>
-
-          <ProgressBar
-            step={organisation.totalProgress ? organisation.totalProgress : 10}
-            steps={organisation.monthlyGoal ? organisation.monthlyGoal : 11}
-            height={10}
-          />
-
-          <RegularText style={styles.text}>
-            Monthly Goal:&nbsp;
-            <BoldText style={{ color: '#FF8900', fontSize: 16 }}>
-              {organisation.totalProgress}
-            </BoldText>
-            <RegularText style={{ fontSize: 16 }}>&nbsp;/&nbsp;</RegularText>
-            <BoldText style={{ color: '#FF8900', fontSize: 16 }}>
-              {organisation.monthlyGoal}
-            </BoldText>
-          </RegularText>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('https://www.worldwildlife.org/')}
+          >
+            <ItalicText>Visit the organisation`s website</ItalicText>
+          </TouchableOpacity>
         </Spacer>
 
-        <Spacer>
-          <BoldText style={styles.sectionTitle}>Overview</BoldText>
-
-          <RegularText>{organisation.overview}</RegularText>
-        </Spacer>
-      </>
+        <SectionText>Gallery</SectionText>
+      </View>
     );
   };
 
   return (
     <View style={styles.screen}>
       <FlatList
-        data={organisation.history}
-        renderItem={({ item }) => {
-          return <HistoryItem item={item} />;
+        data={organisation.facts}
+        renderItem={({ item, index }) => {
+          return <Fact item={item} index={index} />;
         }}
         keyExtractor={(item) => item}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={getHeader}
-        // ListFooterComponent={getFooter}
+        ListFooterComponent={getFooter}
+        contentContainerStyle={{ backgroundColor: 'white' }}
       />
 
-      <CheckoutButton />
+      <CheckoutButton organisation={organisation} />
     </View>
   );
 };

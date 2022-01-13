@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 
-const SectionText = ({ text }) => {
+const SectionText = ({ children }) => {
   return (
     <Spacer>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.text}>{children}</Text>
     </Spacer>
   );
 };

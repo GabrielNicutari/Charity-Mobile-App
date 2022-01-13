@@ -3,8 +3,6 @@ import { StyleSheet, View, Image } from 'react-native';
 import BoldText from './BoldText';
 
 const Keyword = ({ keyword }) => {
-  console.log('keyword:' + keyword);
-
   return (
     <View style={styles.container}>
       <BoldText style={styles.text}>{keyword}</BoldText>
@@ -17,11 +15,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 30,
-    backgroundColor: '#E9EDF3',
+    backgroundColor: '#FAEFE9',
     width: 110,
     height: 40,
     borderRadius: 45,
     justifyContent: 'center'
+  },
+  text: {
+    color: '#ff6a00'
   }
 });
 

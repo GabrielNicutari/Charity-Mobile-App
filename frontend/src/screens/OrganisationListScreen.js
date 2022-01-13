@@ -51,7 +51,7 @@ const OrganisationListScreen = ({ navigation }) => {
   };
 
   const getHeader = () => {
-    return <SectionText text="Organisations" />;
+    return <SectionText>Organisations</SectionText>;
   };
 
   return (
