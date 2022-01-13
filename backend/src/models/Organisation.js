@@ -33,8 +33,8 @@ const organisationSchema = new Schema({
     type: String,
     required: true
   },
-  history: { type: [String] },
-  achievements: [{ achievement: String }],
+  facts: { type: [String] },
+  goals: [{ goal: String, description: String }],
   gallery: [{ picture: String }]
 });
 

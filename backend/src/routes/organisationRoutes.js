@@ -25,8 +25,8 @@ router.post('/organisations', async (req, res) => {
     totalProgress,
     overview,
     category,
-    history,
-    achievements,
+    facts,
+    goals,
     gallery
   } = req.body;
 
@@ -41,8 +41,13 @@ router.post('/organisations', async (req, res) => {
       totalProgress: totalProgress ? totalProgress : 75,
       overview: overview ? overview : 'test',
       category: category ? category : 'category',
-      history: history ? history : ['Event #1', 'Event #2', 'Event #3'],
-      achievements: achievements ? achievements : [],
+      facts: facts ? facts : ['Fact #1', 'Fact #2', 'Fact #3'],
+      goals: goals
+        ? goals
+        : [
+            { goal: 'Do #1', description: 'Desc #1' },
+            { goal: 'Do #2', description: 'Desc #2' }
+          ],
       gallery: gallery ? gallery : []
     });
     await organisation.save();
