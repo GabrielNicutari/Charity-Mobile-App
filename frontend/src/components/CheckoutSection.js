@@ -11,7 +11,7 @@ import ProgressBar from './ProgressBar';
 import RegularText from './RegularText';
 import BoldText from './BoldText';
 
-export default function CheckoutButton({ organisation }) {
+export default function CheckoutSection({ organisation }) {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,7 @@ export default function CheckoutButton({ organisation }) {
 
     const response = await API.post(
       '/checkout',
-      { id: 1 },
+      { organisation: organisation.name },
       {
         headers: {
           Authorization: 'Bearer ' + token //the token is a variable which holds the token
@@ -66,9 +66,9 @@ export default function CheckoutButton({ organisation }) {
     }
   };
 
-  // useEffect(() => {
-  //   initializePaymentSheet();
-  // }, []);
+  useEffect(() => {
+    initializePaymentSheet().then();
+  }, []);
 
   return (
     <View
@@ -108,7 +108,7 @@ export default function CheckoutButton({ organisation }) {
         disabled={!loading}
         title="Donate"
         height={50}
-        // action={openPaymentSheet}
+        action={openPaymentSheet}
       />
     </View>
   );

@@ -8,7 +8,7 @@ import {
   Linking,
   Text
 } from 'react-native';
-import CheckoutButton from '../components/CheckoutButton';
+import CheckoutSection from '../components/CheckoutSection';
 import { Ionicons } from '@expo/vector-icons';
 import Spacer from '../components/Spacer';
 import RegularText from '../components/RegularText';
@@ -161,7 +161,7 @@ const OrganisationScreen = ({ navigation }) => {
         contentContainerStyle={{ backgroundColor: 'white' }}
       />
 
-      <CheckoutButton organisation={organisation} />
+      <CheckoutSection organisation={organisation} />
     </View>
   );
 };
