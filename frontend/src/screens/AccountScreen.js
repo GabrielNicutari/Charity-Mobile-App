@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import GradientHeader from '../components/GradientHeader';
+import Spacer from '../components/Spacer';
+import CustomButton from '../components/CustomButton';
+import { Context as AuthContext } from '../context/AuthContext';
 
 const AccountScreen = ({ navigation }) => {
+  const { signOut } = useContext(AuthContext);
+
   return (
     <View style={styles.screen}>
       <Image
@@ -14,6 +19,12 @@ const AccountScreen = ({ navigation }) => {
         style={styles.shadowLeft}
       />
       <GradientHeader text={'Your Account'} navigation={navigation} height={120} />
+
+      <View style={styles.container}>
+        <Spacer>
+          <CustomButton title="Sign Out" action={signOut} />
+        </Spacer>
+      </View>
     </View>
   );
 };
@@ -41,6 +52,9 @@ const styles = StyleSheet.create({
     left: 0,
     opacity: 0.5,
     top: -120
+  },
+  container: {
+    marginTop: 50
   }
 });
 

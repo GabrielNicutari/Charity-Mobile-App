@@ -3,6 +3,7 @@ import { Text, Input } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 import CustomButton from './CustomButton';
+import RegularText from './RegularText';
 
 const AuthForm = ({
   headerText,
@@ -22,7 +23,7 @@ const AuthForm = ({
         </Text>
       </Spacer>
       <Spacer>
-        <Text style={styles.sectionText}>{sectionText}</Text>
+        <RegularText style={styles.sectionText}>{sectionText}</RegularText>
       </Spacer>
 
       <Spacer />
@@ -58,7 +59,7 @@ const AuthForm = ({
 
       {errorMessage ? (
         <Spacer>
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
+          <RegularText style={styles.errorMessage}>{errorMessage}</RegularText>
         </Spacer>
       ) : null}
 
@@ -105,7 +106,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0
   },
   text: {
-    color: '#45546A'
+    color: '#45546A',
+    fontFamily: 'jakarta-regular'
   }
 });
 

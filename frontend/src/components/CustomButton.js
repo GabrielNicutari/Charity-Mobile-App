@@ -13,7 +13,7 @@ const CustomButton = ({ title, action, height }) => {
       >
         <Button
           buttonStyle={{ backgroundColor: 'transparent', height: height }}
-          titleStyle={{ fontWeight: 'bold' }}
+          titleStyle={{ fontWeight: 'bold', fontFamily: 'jakarta-bold' }}
           title={title}
           onPress={action}
         />
