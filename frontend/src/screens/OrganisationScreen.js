@@ -5,7 +5,7 @@ import Spacer from '../components/Spacer';
 import API from '../api/server';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StripeProvider } from '@stripe/stripe-react-native';
-import CheckoutButton from '../components/CheckoutButton';
+import CheckoutScreen from '../components/CheckoutScreen';
 
 const OrganisationScreen = ({ navigation }) => {
   const organisation = navigation.getParam('organisation');
@@ -17,7 +17,7 @@ const OrganisationScreen = ({ navigation }) => {
       <Text>{organisation.motto}</Text>
       <Text>{organisation.overview}</Text>
 
-      <CheckoutButton />
+      <CheckoutScreen organisation={organisation.name} />
     </View>
   );
 };

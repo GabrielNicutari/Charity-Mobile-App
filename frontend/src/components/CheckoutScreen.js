@@ -5,7 +5,7 @@ import { Button, Alert } from 'react-native';
 import API from '../api/server';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function CheckoutScreen() {
+const CheckoutScreen = ({ organisation }) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +14,7 @@ export default function CheckoutScreen() {
 
     const response = await API.post(
       '/checkout',
-      { id: 1 },
+      { organisation: organisation },
       {
         headers: {
           Authorization: 'Bearer ' + token //the token is a variable which holds the token
@@ -61,7 +61,7 @@ export default function CheckoutScreen() {
   };
 
   useEffect(() => {
-    initializePaymentSheet();
+    initializePaymentSheet().then();
   }, []);
 
   return (
@@ -74,4 +74,6 @@ export default function CheckoutScreen() {
       />
     </Screen>
   );
-}
+};
+
+export default CheckoutScreen;

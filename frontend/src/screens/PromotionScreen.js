@@ -1,11 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import AccountScreen from './AccountScreen';
+import GradientHeader from '../components/GradientHeader';
 
-const PromotionScreen = (props) => {
+const PromotionScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
-      <Text>The Promotion Screen!</Text>
+      <View style={styles.screen}>
+        <Image
+          source={require('../../assets/ellipse-blur.png')}
+          style={styles.shadowRight}
+        />
+        <Image
+          source={require('../../assets/ellipse-blue-blur.png')}
+          style={styles.shadowLeft}
+        />
+        <GradientHeader text={'Rewards'} navigation={navigation} height={120} />
+      </View>
     </View>
   );
 };
@@ -22,6 +33,17 @@ PromotionScreen.navigationOptions = {
 const styles = StyleSheet.create({
   screen: {
     flex: 1
+  },
+  shadowRight: {
+    position: 'absolute',
+    right: 0,
+    bottom: -150
+  },
+  shadowLeft: {
+    position: 'absolute',
+    left: 0,
+    opacity: 0.5,
+    top: -120
   }
 });
 

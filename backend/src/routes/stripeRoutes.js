@@ -27,6 +27,7 @@ router.post('/checkout', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 1099,
     currency: 'eur',
+    description: req.body.organisation,
     customer: customer.id,
     automatic_payment_methods: {
       enabled: true
