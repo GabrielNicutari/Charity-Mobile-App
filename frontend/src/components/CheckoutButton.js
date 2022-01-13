@@ -1,11 +1,17 @@
 import { useStripe } from '@stripe/stripe-react-native';
 import React, { useEffect, useState } from 'react';
 import { Screen } from 'react-native-screens';
-import { Button, Alert } from 'react-native';
+import { Button, Alert, View } from 'react-native';
 import API from '../api/server';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomButton from './CustomButton';
+import SectionText from './SectionText';
+import Spacer from './Spacer';
+import ProgressBar from './ProgressBar';
+import RegularText from './RegularText';
+import BoldText from './BoldText';
 
-export default function CheckoutScreen() {
+export default function CheckoutButton({ organisation }) {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
 
@@ -60,18 +66,50 @@ export default function CheckoutScreen() {
     }
   };
 
-  useEffect(() => {
-    initializePaymentSheet();
-  }, []);
+  // useEffect(() => {
+  //   initializePaymentSheet();
+  // }, []);
 
   return (
-    <Screen>
-      <Button
+    <View
+      style={{
+        backgroundColor: 'white',
+        height: 100,
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        elevation: 5
+      }}
+    >
+      <View>
+        <BoldText style={{ fontSize: 20 }}>Progress</BoldText>
+
+        <RegularText style={{ marginBottom: 10 }}>
+          Monthly Goal:&nbsp;
+          <BoldText style={{ color: '#FF8900', fontSize: 16 }}>
+            {organisation.totalProgress}
+          </BoldText>
+          <RegularText style={{ fontSize: 16 }}>&nbsp;/&nbsp;</RegularText>
+          <BoldText style={{ color: '#FF8900', fontSize: 16 }}>
+            {organisation.monthlyGoal}
+          </BoldText>
+        </RegularText>
+
+        <ProgressBar
+          step={organisation.totalProgress ? organisation.totalProgress : 10}
+          steps={organisation.monthlyGoal ? organisation.monthlyGoal : 11}
+          height={10}
+        />
+      </View>
+
+      <CustomButton
         variant="primary"
         disabled={!loading}
         title="Donate"
-        onPress={openPaymentSheet}
+        height={50}
+        // action={openPaymentSheet}
       />
-    </Screen>
+    </View>
   );
 }
