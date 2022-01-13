@@ -60,7 +60,7 @@ export default function CheckoutSection({ organisation }) {
     const { error } = await presentPaymentSheet();
 
     if (error) {
-      Alert.alert(`Error code: ${error.code}`, error.message);
+      console.log('Error:\n', error.message);
     } else {
       Alert.alert('Success', 'Your donation is confirmed!');
     }
