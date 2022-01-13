@@ -1,9 +1,11 @@
 require('./models/Organisation');
 require('./models/User');
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const organisationRoutes = require('./routes/organisationRoutes');
+const stripeRoutes = require('./routes/stripeRoutes');
 // const appRouter = require('./router'); // for a better organisation of the routes (more complex apps)
 const requireAuth = require('./middlewares/requireAuth');
 
@@ -12,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authRoutes);
 app.use(organisationRoutes);
+app.use(stripeRoutes);
 
 const mongoUri =
   'mongodb+srv://admin:w8A1min@charityapp.ku5h3.mongodb.net/charity?retryWrites=true&w=majority';

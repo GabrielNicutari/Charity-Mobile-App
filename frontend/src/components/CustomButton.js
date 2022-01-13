@@ -3,16 +3,16 @@ import { StyleSheet, View, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const CustomButton = ({ title, action }) => {
+const CustomButton = ({ title, action, height }) => {
   return (
     <View style={styles.container}>
       <LinearGradient
         style={styles.button}
-        colors={['#ed1c24', '#f26522']}
+        colors={['#f26522', '#ed1c24']}
         end={{ x: 1, y: 1 }}
       >
         <Button
-          buttonStyle={{ backgroundColor: 'transparent' }}
+          buttonStyle={{ backgroundColor: 'transparent', height: height }}
           titleStyle={{ fontWeight: 'bold' }}
           title={title}
           onPress={action}

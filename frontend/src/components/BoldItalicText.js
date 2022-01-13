@@ -1,16 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-const BoldText = ({ children, style }) => {
+const BoldItalicText = ({ children, style }) => {
   return <Text style={[styles.text, style]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'jakarta-bold',
-    color: '#333E63',
-    fontSize: 14
+    fontFamily: 'jakarta-bold-italic',
+    color: '#333E63'
   }
 });
 
-export default BoldText;
+export default BoldItalicText;

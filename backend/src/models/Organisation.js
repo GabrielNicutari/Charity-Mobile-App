@@ -11,6 +11,10 @@ const organisationSchema = new Schema({
     type: String,
     required: true
   },
+  logo: {
+    type: String,
+    required: true
+  },
   motto: {
     type: String,
     required: true
@@ -29,9 +33,9 @@ const organisationSchema = new Schema({
     type: String,
     required: true
   },
-  history: [{ event: String }],
-  achievements: [{ achievement: String }],
-  gallery: [{ picture: String }]
+  facts: { type: [String] },
+  goals: [{ goal: String, description: String }],
+  gallery: { type: [String] }
 });
 
 module.exports = mongoose.model('Organisation', organisationSchema);

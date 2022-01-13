@@ -8,6 +8,7 @@ import RegularText from './RegularText';
 import BoldText from './BoldText';
 import ProgressBar from './ProgressBar';
 import * as Animatable from 'react-native-animatable';
+import ItalicText from './ItalicText';
 
 const Organisation = ({ navigation, organisation, index }) => {
   return (
@@ -38,15 +39,15 @@ const Organisation = ({ navigation, organisation, index }) => {
         >
           <View style={styles.container}>
             <View style={styles.logoContainer}>
-              <Image source={{ uri: organisation.bannerImage }} style={styles.logo} />
+              <Image source={{ uri: organisation.logo }} style={styles.logo} />
             </View>
 
             <View style={styles.infoSection}>
               <BoldText style={{ fontSize: 14 }}>{organisation.name}</BoldText>
 
-              <RegularText style={{ fontSize: 13, marginBottom: 10 }}>
+              <ItalicText style={{ fontSize: 13, marginBottom: 10 }}>
                 {organisation.motto}
-              </RegularText>
+              </ItalicText>
 
               <ProgressBar
                 step={organisation.totalProgress ? organisation.totalProgress : 10}

@@ -18,14 +18,15 @@ router.post('/organisations', async (req, res) => {
   const {
     name,
     bannerImage,
+    logo,
     motto,
     keywords,
     monthlyGoal,
     totalProgress,
     overview,
     category,
-    history,
-    achievements,
+    facts,
+    goals,
     gallery
   } = req.body;
 
@@ -33,14 +34,20 @@ router.post('/organisations', async (req, res) => {
     const organisation = new Organisation({
       name: name ? name : 'test name',
       bannerImage: bannerImage ? bannerImage : 'test',
+      logo: logo ? logo : 'test',
       motto: motto ? motto : 'test motto',
       keywords: keywords ? keywords : ['test', 'test2', 'test3'],
       monthlyGoal: monthlyGoal ? monthlyGoal : 100,
       totalProgress: totalProgress ? totalProgress : 75,
       overview: overview ? overview : 'test',
       category: category ? category : 'category',
-      history: history ? history : [],
-      achievements: achievements ? achievements : [],
+      facts: facts ? facts : ['Fact #1', 'Fact #2', 'Fact #3'],
+      goals: goals
+        ? goals
+        : [
+            { goal: 'Do #1', description: 'Desc #1' },
+            { goal: 'Do #2', description: 'Desc #2' }
+          ],
       gallery: gallery ? gallery : []
     });
     await organisation.save();
