@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   text: {
-    color: '#ff6a00'
+    color: '#ff6a00',
+    maxWidth: '90%'
   }
 });
 
