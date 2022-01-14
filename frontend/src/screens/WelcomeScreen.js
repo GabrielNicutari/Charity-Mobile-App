@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import BoldText from '../components/BoldText';
 
 const WelcomeScreen = (props) => {
   return (
     <View style={styles.screen}>
-      <Text>The Welcome Screen!</Text>
+      <BoldText>The Welcome Screen!</BoldText>
     </View>
   );
 };

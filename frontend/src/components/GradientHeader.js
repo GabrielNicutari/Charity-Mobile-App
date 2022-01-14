@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Spacer from './Spacer';
 import { Ionicons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
+import BoldText from './BoldText';
 
 const GradientHeader = ({ text, height, marginBottom, center, children, navigation }) => {
   return (
@@ -33,7 +34,7 @@ const GradientHeader = ({ text, height, marginBottom, center, children, navigati
             >
               <Ionicons name="arrow-back" size={28} color="white" />
             </TouchableOpacity>
-            <Text style={styles.title}>{text}</Text>
+            <BoldText style={styles.title}>{text}</BoldText>
           </View>
         </Spacer>
       ) : null}
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: 'white',
-    fontFamily: 'jakarta-bold',
+    // fontFamily: 'jakarta-bold',
     lineHeight: 20
   }
 });

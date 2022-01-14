@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 import CustomButton from './CustomButton';
 import RegularText from './RegularText';
+import BoldText from './BoldText';
 
 const AuthForm = ({
   headerText,
@@ -18,9 +19,7 @@ const AuthForm = ({
   return (
     <>
       <Spacer>
-        <Text h1 style={styles.headerText}>
-          {headerText}
-        </Text>
+        <BoldText style={styles.headerText}>{headerText}</BoldText>
       </Spacer>
       <Spacer>
         <RegularText style={styles.sectionText}>{sectionText}</RegularText>
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   headerText: {
-    color: '#45546A'
+    fontSize: 38
   },
   sectionText: {
     color: '#45546A',
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     shadowRadius: 15,
     elevation: 8,
     justifyContent: 'center',
-    paddingTop: 25
+    paddingTop: 20
   },
   input: {
     height: 30,

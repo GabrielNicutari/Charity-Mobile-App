@@ -42,7 +42,7 @@ const SignupScreen = () => {
           <NavigationEvents onWillFocus={clearErrorMessage} />
           <AuthForm
             headerText="Join Us"
-            sectionText="Sign Up for Do|Nation"
+            sectionText="Sign Up for Do | Nation"
             errorMessage={state.errorMessage}
             submitButtonText="Sign Up"
             onSubmit={signUp} // same as -> onSubmit={(email, password) => signup({ email, password })}

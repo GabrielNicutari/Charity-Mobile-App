@@ -116,6 +116,7 @@ export default function CheckoutSection({ organisation }) {
         title="Donate"
         height={50}
         action={handlePress}
+        checkout
       />
     </View>
   );

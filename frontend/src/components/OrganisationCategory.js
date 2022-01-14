@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Text } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
+import BoldText from './BoldText';
 
 const OrganisationCategory = ({ navigation, category }) => {
   const { width } = useWindowDimensions();
@@ -32,7 +33,7 @@ const OrganisationCategory = ({ navigation, category }) => {
           />
 
           <View style={{ flex: 0.1 }}>
-            <Text style={styles.text}>{category.name}</Text>
+            <BoldText style={styles.text}>{category.name}</BoldText>
           </View>
         </View>
       </TouchableOpacity>
@@ -42,9 +43,7 @@ const OrganisationCategory = ({ navigation, category }) => {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#333E63',
-    fontSize: 24,
-    fontFamily: 'jakarta-bold'
+    fontSize: 24
   },
   container: {
     justifyContent: 'center',
