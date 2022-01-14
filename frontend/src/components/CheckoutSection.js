@@ -13,7 +13,7 @@ import BoldText from './BoldText';
 
 export default function CheckoutSection({ organisation }) {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchPaymentSheetParams = async () => {
     const token = await AsyncStorage.getItem('token');
@@ -41,7 +41,7 @@ export default function CheckoutSection({ organisation }) {
     const { paymentIntent, ephemeralKey, customer, publishableKey } =
       await fetchPaymentSheetParams();
 
-    const { error } = await initPaymentSheet({
+    const text = await initPaymentSheet({
       customerId: customer,
       customerEphemeralKeySecret: ephemeralKey,
       paymentIntentClientSecret: paymentIntent,
@@ -51,9 +51,11 @@ export default function CheckoutSection({ organisation }) {
       merchantDisplayName: 'Merchant'
     });
 
-    if (!error) {
-      setLoading(true);
+    if (!text.error) {
+      setLoading(false);
     }
+
+    console.log(text);
   };
 
   const openPaymentSheet = async () => {
@@ -64,6 +66,11 @@ export default function CheckoutSection({ organisation }) {
     } else {
       Alert.alert('Success', 'Your donation is confirmed!');
     }
+  };
+
+  const handlePress = async () => {
+    await openPaymentSheet();
+    await initializePaymentSheet();
   };
 
   useEffect(() => {
@@ -105,10 +112,10 @@ export default function CheckoutSection({ organisation }) {
 
       <CustomButton
         variant="primary"
-        disabled={!loading}
+        disabled={loading}
         title="Donate"
         height={50}
-        action={openPaymentSheet}
+        action={handlePress}
       />
     </View>
   );

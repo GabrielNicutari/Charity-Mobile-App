@@ -13,8 +13,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authRoutes);
-app.use(organisationRoutes);
 app.use(stripeRoutes);
+app.use(organisationRoutes);
 
 const mongoUri =
   'mongodb+srv://admin:w8A1min@charityapp.ku5h3.mongodb.net/charity?retryWrites=true&w=majority';

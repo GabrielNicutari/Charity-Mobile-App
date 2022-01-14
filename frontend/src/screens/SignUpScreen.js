@@ -22,7 +22,7 @@ const SignupScreen = () => {
 
   return (
     <KeyboardAvoidingView>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <View style={styles.container}>
           <GradientHeader height={170} marginBottom={50} center />
 

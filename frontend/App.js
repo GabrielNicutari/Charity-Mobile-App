@@ -15,7 +15,6 @@ import { setNavigator } from './src/navigationRef';
 import Loading from './src/screens/Loading';
 import * as Font from 'expo-font';
 import AppLoadingPlaceholder from 'expo/build/launch/AppLoadingPlaceholder';
-import TabBar from './src/components/TabBar';
 import { Image } from 'react-native';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import API from './src/api/server';
@@ -112,13 +111,18 @@ export default () => {
   const fetchPublishableKey = async () => {
     const token = await AsyncStorage.getItem('token');
 
+    // if (token) {
     const response = await API.get('/stripe-key', {
-      headers: {
-        Authorization: 'Bearer ' + token //the token is a variable which holds the token
-      }
+      // headers: {
+      //   Authorization: 'Bearer ' + token //the token is a variable which holds the token
+      // }
     });
 
-    setPublishableKey(response.data.publishableKey);
+    if (response.data.publishableKey) {
+      setPublishableKey(response.data.publishableKey);
+    }
+
+    // }
   };
 
   useEffect(() => {
@@ -138,7 +142,7 @@ export default () => {
   return (
     <StripeProvider
       publishableKey={publishableKey}
-      enableGooglePay={true}
+      // enableGooglePay={true}
       // urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
       // merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
     >

@@ -12,7 +12,7 @@ const SignInScreen = () => {
 
   return (
     <KeyboardAvoidingView>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <View style={{ flex: 1 }}>
           <GradientHeader height={230} center>
             {/*<Image source={require('../../assets/Logo_hvid.png')} />*/}

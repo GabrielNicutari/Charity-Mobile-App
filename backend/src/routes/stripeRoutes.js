@@ -5,7 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const router = express.Router();
 
-router.use(requireAuth);
+// router.use(requireAuth);
 
 router.get('/stripe-key', (req, res) => {
   const publishable_key = process.env.STRIPE_PUBLISHABLE_KEY;
@@ -13,7 +13,7 @@ router.get('/stripe-key', (req, res) => {
   res.send({ publishableKey: publishable_key });
 });
 
-router.post('/checkout', async (req, res) => {
+router.post('/checkout', requireAuth, async (req, res) => {
   // Use an existing Customer ID if this is a returning customer.
   // console.log('backend');
   // res.json({
@@ -25,8 +25,8 @@ router.post('/checkout', async (req, res) => {
     { apiVersion: '2020-08-27' }
   );
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1099,
-    currency: 'eur',
+    amount: 50000,
+    currency: 'dkk',
     description: req.body.organisation,
     customer: customer.id,
     automatic_payment_methods: {
@@ -37,8 +37,8 @@ router.post('/checkout', async (req, res) => {
   res.json({
     paymentIntent: paymentIntent.client_secret,
     ephemeralKey: ephemeralKey.secret,
-    customer: customer.id,
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
+    customer: customer.id
+    // publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
   });
 });
 
