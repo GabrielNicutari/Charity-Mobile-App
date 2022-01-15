@@ -1,8 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-const RegularText = ({ children, style }) => {
-  return <Text style={[styles.text, style]}>{children}</Text>;
+const RegularText = ({ children, style, center }) => {
+  return (
+    <Text style={[styles.text, style, { textAlign: center ? 'center' : 'auto' }]}>
+      {children}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

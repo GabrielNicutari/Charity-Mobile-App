@@ -19,6 +19,7 @@ import { Image } from 'react-native';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import API from './src/api/server';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 
 const loadFonts = () => {
   return Font.loadAsync({
@@ -59,6 +60,7 @@ organisationFlow.navigationOptions = ({ navigation }) => {
 
 const switchNavigator = createSwitchNavigator({
   Loading: Loading,
+  Welcome: WelcomeScreen,
   loginFlow: createStackNavigator({
     SignIn: SignInScreen,
     SignUp: SignUpScreen

@@ -6,36 +6,32 @@ import {
   Image,
   useWindowDimensions
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import BoldText from './BoldText';
+import RegularText from './RegularText';
 
-const OrganisationCategory = ({ navigation, category }) => {
+const Slide = ({ slide }) => {
   const { width } = useWindowDimensions();
 
   return (
     <>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate({
-            routeName: 'OrganisationList',
-            params: {
-              organisationCategory: category.name
-            }
-          })
-        }
-        delayPressIn={30}
-      >
+      <View delayPressIn={30}>
         <View style={[styles.container, { width }]}>
           <Image
-            source={category.image}
+            source={slide.image}
             style={[styles.image, { width, resizeMode: 'contain' }]}
           />
 
-          <View style={{ flex: 0.1 }}>
-            <BoldText style={styles.text}>{category.name}</BoldText>
+          <View style={{ flex: 0.1, alignItems: 'center' }}>
+            <BoldText style={styles.text}>{slide.name}</BoldText>
+
+            <View style={{ maxWidth: 250 }}>
+              <RegularText center style={{ fontSize: 11 }}>
+                {slide.description}
+              </RegularText>
+            </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -56,4 +52,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(OrganisationCategory);
+export default Slide;

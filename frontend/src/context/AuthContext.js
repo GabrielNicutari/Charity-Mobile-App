@@ -36,8 +36,20 @@ const tryLocalSignIn = (dispatch) => async () => {
     dispatch({ type: ACTIONS.AUTHENTICATE, payload: token });
     navigate('mainFlow');
   } else {
-    navigate('SignIn');
+    const viewedOnboarding = await AsyncStorage.getItem('viewedOnboarding');
+
+    if (!viewedOnboarding) {
+      navigate('Welcome');
+    } else {
+      navigate('SignIn');
+    }
   }
+};
+
+const finishOnboarding = () => async () => {
+  await AsyncStorage.setItem('viewedOnboarding', 'true');
+
+  navigate('SignIn');
 };
 
 const signUp =
@@ -83,6 +95,6 @@ const signOut = (dispatch) => async () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signIn, signOut, signUp, clearErrorMessage, tryLocalSignIn },
+  { signIn, signOut, signUp, clearErrorMessage, tryLocalSignIn, finishOnboarding },
   { token: null, errorMessage: '' }
 );

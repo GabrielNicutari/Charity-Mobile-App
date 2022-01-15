@@ -42,23 +42,6 @@ SignInScreen.navigationOptions = () => {
   };
 };
 
-const styles = StyleSheet.create({
-  header: {
-    height: 230,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 6
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16,
-
-    elevation: 15
-  }
-});
+const styles = StyleSheet.create({});
 
 export default SignInScreen;
